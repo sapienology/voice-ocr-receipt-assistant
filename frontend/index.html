@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice Receipt Assistant</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Private receipt workspace</p>
+          <h1>Voice OCR Receipt Assistant</h1>
+          <p class="subtitle">Turn a receipt or voice note into useful answers in seconds.</p>
+        </div>
+        <div class="status-box" id="backend-status">Checking backend…</div>
+      </header>
+
+      <main class="grid">
+        <section class="panel panel-featured">
+          <div class="panel-heading">
+            <span class="step">01</span>
+            <div>
+              <p class="kicker">Document intelligence</p>
+              <h2>Scan a receipt</h2>
+            </div>
+          </div>
+          <label class="file-picker">
+            <input type="file" id="receipt-file" accept="image/jpeg,image/png,image/webp,image/bmp,application/pdf" />
+            <span id="receipt-file-name">Drop an image or choose a file</span>
+          </label>
+          <button id="upload-receipt-btn" class="primary-btn">Analyze Receipt</button>
+          <div id="receipt-result" class="result-box hidden"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <span class="step">02</span>
+            <div>
+              <p class="kicker">Ask naturally</p>
+              <h2>Explore the details</h2>
+            </div>
+          </div>
+          <textarea
+            id="question-input"
+            rows="4"
+            placeholder="What is the total amount?"
+          ></textarea>
+          <button id="ask-btn" class="primary-btn">Ask Question</button>
+          <div id="answer-result" class="result-box hidden"></div>
+        </section>
+
+        <section class="panel full-width">
+          <div class="panel-heading">
+            <span class="step">03</span>
+            <div>
+              <p class="kicker">Voice input</p>
+              <h2>Transcribe a note</h2>
+            </div>
+          </div>
+          <label class="file-picker">
+            <input type="file" id="audio-file" accept="audio/*" />
+            <span id="audio-file-name">Choose an audio recording</span>
+          </label>
+          <button id="transcribe-btn" class="secondary-btn">Transcribe Audio</button>
+          <div id="transcription-result" class="result-box hidden"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

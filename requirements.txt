@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+torch
+transformers
+Pillow
+soundfile
+torchaudio
+librosa
+gTTS
+sentencepiece
+pydantic
+paddleocr
+paddlepaddle
