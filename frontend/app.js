@@ -108,7 +108,7 @@ async function uploadReceipt() {
     receiptResult.classList.remove('hidden', 'error');
     receiptResult.classList.add('success');
   } catch (error) {
-    showResult(receiptResult, `Receipt processing failed: ${error.message}`, 'error');
+    showResult(receiptResult, error.message || 'Receipt processing failed.', 'error');
   } finally {
     setBusy(button, false, 'Analyze Receipt');
   }
