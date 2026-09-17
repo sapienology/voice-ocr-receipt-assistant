@@ -70,6 +70,19 @@ Open `http://localhost:3000`. The frontend calls the API on port 8001. For a
 different frontend URL, set `FRONTEND_ORIGINS` to a comma-separated list of
 allowed origins before starting Uvicorn.
 
+## Docker deployment
+
+Build and run the complete app as one container:
+
+```powershell
+docker build -t voice-ocr-receipt-assistant .
+docker run --rm -p 8000:8000 -v receipt-uploads:/app/uploads voice-ocr-receipt-assistant
+```
+
+Open `http://localhost:8000`. The container serves both the frontend and API.
+OCR and speech model files download on first use and are cached inside the
+container unless a model cache volume is configured.
+
 The receipt OCR uses PaddleOCR `PP-OCRv6_medium`, a free pretrained detector
 and recognizer that handles varied receipt layouts. Speech transcription uses the lighter
 `openai/whisper-tiny`. Hugging Face downloads each model on its first use; set

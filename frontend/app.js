@@ -1,5 +1,4 @@
-const API_PORT = window.location.port === '3000' ? '8001' : '8000';
-const API_BASE = `${window.location.protocol}//${window.location.hostname}:${API_PORT}`;
+const API_BASE = '';
 
 const backendStatus = document.getElementById('backend-status');
 const receiptFileInput = document.getElementById('receipt-file');
@@ -60,7 +59,7 @@ async function checkBackend() {
       setStatus('Backend responded unexpectedly', true);
     }
   } catch (error) {
-    setStatus(`Backend offline on port ${API_PORT}`, true);
+    setStatus('Backend offline', true);
   }
 }
 

@@ -7,6 +7,7 @@ from pathlib import Path
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.services.speech_service import SpeechService
 from app.services.receipt_service import ReceiptService
@@ -55,6 +56,7 @@ voice_service = VoiceService()
 # ==========================================
 
 UPLOAD_DIRECTORY = str(Path(__file__).resolve().parent.parent / "uploads")
+FRONTEND_DIRECTORY = Path(__file__).resolve().parent.parent / "frontend"
 
 os.makedirs(
     UPLOAD_DIRECTORY,
@@ -70,12 +72,21 @@ current_receipt = None
 # HOME
 # ==========================================
 
-@app.get("/")
-def root():
+@app.get("/api")
+def api_root():
+    return {"message": "Voice Receipt Assistant API is running!"}
 
-    return {
-        "message": "Voice Receipt Assistant is running!"
-    }
+
+@app.get("/")
+def frontend_root():
+    return FileResponse(FRONTEND_DIRECTORY / "index.html")
+
+
+app.mount(
+    "/frontend",
+    StaticFiles(directory=FRONTEND_DIRECTORY),
+    name="frontend",
+)
 
 
 # ==========================================

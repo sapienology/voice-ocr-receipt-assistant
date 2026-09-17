@@ -12,11 +12,15 @@ def test_root():
 
     assert response.status_code == 200
 
-    data = response.json()
+    assert "Voice OCR Receipt Assistant" in response.text
 
-    assert data["message"] == (
-        "Voice Invoice Receipt Assistant is running"
-    )
+
+def test_api_root():
+
+    response = client.get("/api")
+
+    assert response.status_code == 200
+    assert "API is running" in response.json()["message"]
 
 
 def test_health():
