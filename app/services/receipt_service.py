@@ -9,8 +9,6 @@ os.environ.setdefault("PADDLE_PDX_ENABLE_MKLDNN_BYDEFAULT", "False")
 
 from PIL import Image
 
-from paddleocr import PaddleOCR
-
 from app.models.receipt import Receipt, ReceiptItem
 
 
@@ -18,7 +16,7 @@ class ReceiptService:
 
     def __init__(self):
 
-        self.model_name = os.getenv("RECEIPT_MODEL", "PP-OCRv6_medium")
+        self.model_name = os.getenv("RECEIPT_MODEL", "PP-OCRv5_mobile")
         self.model = None
 
         print("Receipt service created.")
@@ -36,8 +34,18 @@ class ReceiptService:
 
         try:
             print("Loading PaddleOCR models...")
+            from paddleocr import PaddleOCR
+
             self.model = PaddleOCR(
                 lang="en",
+                text_detection_model_name=os.getenv(
+                    "RECEIPT_DETECTION_MODEL",
+                    "PP-OCRv5_mobile_det"
+                ),
+                text_recognition_model_name=os.getenv(
+                    "RECEIPT_RECOGNITION_MODEL",
+                    "PP-OCRv5_mobile_rec"
+                ),
                 use_doc_orientation_classify=False,
                 use_doc_unwarping=False,
                 use_textline_orientation=False,

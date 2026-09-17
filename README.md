@@ -83,8 +83,9 @@ Open `http://localhost:8000`. The container serves both the frontend and API.
 OCR and speech model files download on first use and are cached inside the
 container unless a model cache volume is configured.
 
-The receipt OCR uses PaddleOCR `PP-OCRv6_medium`, a free pretrained detector
-and recognizer that handles varied receipt layouts. Speech transcription uses the lighter
+The receipt OCR uses PaddleOCR's lightweight `PP-OCRv5_mobile` detector and
+recognizer, a free pretrained model that handles varied receipt layouts while
+using less memory on small deployments. Speech transcription uses the lighter
 `openai/whisper-tiny`. Hugging Face downloads each model on its first use; set
 `RECEIPT_MODEL` or `SPEECH_MODEL` to a local model path when deploying without
 internet access.
