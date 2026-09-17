@@ -2,19 +2,13 @@
 import os
 
 import soundfile as sf
-import torch
-from transformers import pipeline
 
 
 class SpeechService:
 
     def __init__(self):
         self.pipe = None
-
-        if torch.cuda.is_available():
-            self.device = 0
-        else:
-            self.device = -1
+        self.device = -1
 
     def transcribe(self, audio_file):
 
@@ -24,6 +18,10 @@ class SpeechService:
 
         try:
             if self.pipe is None:
+                import torch
+                from transformers import pipeline
+
+                self.device = 0 if torch.cuda.is_available() else -1
                 print("Loading Whisper model...")
                 pipe = pipeline(
                     "automatic-speech-recognition",
