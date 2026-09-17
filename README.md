@@ -89,3 +89,7 @@ using less memory on small deployments. Speech transcription uses the lighter
 `openai/whisper-tiny`. Hugging Face downloads each model on its first use; set
 `RECEIPT_MODEL` or `SPEECH_MODEL` to a local model path when deploying without
 internet access.
+
+Render's 512 MB service tier may still be too small for PaddlePaddle OCR during
+the first receipt request. Use a larger memory instance for OCR, or keep OCR
+disabled on the smallest tier and use the fallback response.

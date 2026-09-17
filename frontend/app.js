@@ -1,4 +1,6 @@
-const API_BASE = '';
+const API_BASE = window.location.port === '3000'
+  ? `${window.location.protocol}//${window.location.hostname}:8001`
+  : '';
 
 const backendStatus = document.getElementById('backend-status');
 const receiptFileInput = document.getElementById('receipt-file');
@@ -106,7 +108,7 @@ async function uploadReceipt() {
     receiptResult.classList.remove('hidden', 'error');
     receiptResult.classList.add('success');
   } catch (error) {
-    showResult(receiptResult, `Error: ${error.message}`, 'error');
+    showResult(receiptResult, `Receipt processing failed: ${error.message}`, 'error');
   } finally {
     setBusy(button, false, 'Analyze Receipt');
   }
